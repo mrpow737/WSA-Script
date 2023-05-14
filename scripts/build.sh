@@ -577,7 +577,7 @@ if [ "$GAPPS_BRAND" != "none" ] || [ "$ROOT_SOL" = "magisk" ]; then
         fi
         # shellcheck disable=SC1090
         source "$WSA_WORK_ENV" || abort
-        if [ "$MAGISK_VERSION_CODE" -lt 25211 ] && [ "$MAGISK_VER" != "stable" ] && [ -z ${CUSTOM_MAGISK+x} ]; then
+        if [ "$MAGISK_VERSION_CODE" -lt 25211 ] && [ "$MAGISK_VER" != "delta" ] && [ -z ${CUSTOM_MAGISK+x} ]; then
             echo "Please install Magisk 25211+"
             abort
         fi
@@ -732,6 +732,7 @@ if [ "$REMOVE_AMAZON" ]; then
     echo "Remove Amazon Appstore"
     find "${PRODUCT_MNT:?}"/{etc/permissions,etc/sysconfig,framework,priv-app} 2>/dev/null | grep -e amazon -e venezia | sudo xargs rm -rf
     find "${SYSTEM_EXT_MNT:?}"/{etc/*permissions,framework,priv-app} 2>/dev/null | grep -e amazon -e venezia | sudo xargs rm -rf
+    rm -rf "$WORK_DIR/wsa/$ARCH/apex"
     echo -e "done\n"
 fi
 
